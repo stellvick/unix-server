@@ -1,13 +1,14 @@
 FROM lscr.io/linuxserver/webtop:ubuntu-xfce
 
-# Adicionar repositório multiverse para pacotes adicionais
+# Adicionar repositórios necessários
 RUN apt-get update && \
     apt-get install -y software-properties-common && \
-    add-apt-repository multiverse
+    add-apt-repository universe && \
+    add-apt-repository multiverse && \
+    apt-get update
 
 # Instalar dependências do sistema
-RUN apt-get update && \
-    apt-get install -y \
+RUN apt-get install -y \
     curl \
     gnupg \
     ca-certificates \
@@ -34,7 +35,6 @@ RUN apt-get update && \
     libgtk-3-0 \
     libx11-xcb1 \
     libxss1 \
-    libasound2 \
     libgbm1 \
     libreoffice \
     remmina \
@@ -42,6 +42,9 @@ RUN apt-get update && \
     remmina-plugin-vnc \
     proot \
     gvfs
+
+# Instalar libasound2 explicitamente
+RUN apt-get install -y libasound2t64 || apt-get install -y libasound2
 
 # Instalar Node.js via NodeSource
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
