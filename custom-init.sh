@@ -7,5 +7,5 @@ service NetworkManager start
 # Iniciar NM Applet
 nm-applet --indicator &
 
-# Manter container rodando
-exec /init
+# Iniciar o processo principal do Webtop
+exec /init "$@"

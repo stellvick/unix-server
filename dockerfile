@@ -30,5 +30,12 @@ RUN mkdir -p /var/run/dbus && \
 RUN mkdir -p /config/.config/autostart && \
     echo '[Desktop Entry]\nType=Application\nName=NetworkManager Applet\nExec=nm-applet --indicator\nComment=Manage network connections' > /config/.config/autostart/nm-applet.desktop
 
+# Copiar e configurar script de inicialização
+COPY custom-init.sh /custom-init.sh
+RUN chmod +x /custom-init.sh
+
 # Fixar permissões
 RUN usermod -aG netdev abc
+
+# Definir entrypoint personalizado
+ENTRYPOINT ["/custom-init.sh"]
