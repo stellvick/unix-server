@@ -1,5 +1,10 @@
 FROM lscr.io/linuxserver/webtop:ubuntu-xfce
 
+# Adicionar repositório multiverse para pacotes adicionais
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    add-apt-repository multiverse
+
 # Instalar dependências do sistema
 RUN apt-get update && \
     apt-get install -y \
@@ -19,13 +24,13 @@ RUN apt-get update && \
     policykit-1-gnome \
     xfce4-notifyd \
     xfce4-pulseaudio-plugin \
+    libnss3 \
     libnss3-tools \
     gir1.2-appindicator3-0.1 \
     wget \
     dbus \
     dbus-x11 \
     sudo \
-    gvfs-bin \
     libgtk-3-0 \
     libx11-xcb1 \
     libxss1 \
@@ -35,7 +40,8 @@ RUN apt-get update && \
     remmina \
     remmina-plugin-rdp \
     remmina-plugin-vnc \
-    proot
+    proot \
+    gvfs
 
 # Instalar Node.js via NodeSource
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
