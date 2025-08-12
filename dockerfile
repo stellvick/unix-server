@@ -21,6 +21,7 @@ RUN apt-get install -y \
     openvpn \
     network-manager-openvpn \
     network-manager-openvpn-gnome \
+    network-manager-gnome \  # Adicione explicitamente
     gnome-keyring \
     policykit-1-gnome \
     xfce4-notifyd \
@@ -145,11 +146,11 @@ Type=Application
 Categories=Network;
 EOL
 
-# Ícone para configurar VPN
+# Corrigir o ícone da VPN - usar caminho completo
 RUN cat > /usr/share/applications/nm-connection-editor.desktop <<EOL
 [Desktop Entry]
 Name=Network Connections
-Exec=nm-connection-editor
+Exec=/usr/bin/nm-connection-editor
 Icon=nm-device-wireless
 Terminal=false
 Type=Application
@@ -162,3 +163,7 @@ RUN mkdir -p /config/Desktop && \
     cp /usr/share/applications/code.desktop /config/Desktop/ && \
     cp /usr/share/applications/postman.desktop /config/Desktop/ && \
     cp /usr/share/applications/nm-connection-editor.desktop /config/Desktop/
+
+# Garantir que nm-connection-editor está instalado
+RUN which nm-connection-editor || echo "nm-connection-editor not found!" && \
+    ln -s /usr/bin/nm-connection-editor /usr/local/bin/nm-connection-editor
