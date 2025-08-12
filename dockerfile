@@ -7,7 +7,7 @@ RUN apt-get update && \
     add-apt-repository multiverse && \
     apt-get update
 
-# Instalar dependências do sistema
+# Instalar dependências do sistema - TUDO NA MESMA LINHA SEM COMENTÁRIOS
 RUN apt-get install -y \
     curl \
     gnupg \
@@ -21,7 +21,7 @@ RUN apt-get install -y \
     openvpn \
     network-manager-openvpn \
     network-manager-openvpn-gnome \
-    network-manager-gnome \  # Adicione explicitamente
+    network-manager-gnome \
     gnome-keyring \
     policykit-1-gnome \
     xfce4-notifyd \
