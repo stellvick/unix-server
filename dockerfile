@@ -1,15 +1,16 @@
 FROM lscr.io/linuxserver/webtop:ubuntu-xfce
 
-# Instalar todos os pacotes necessários
+# Instalar dependências do sistema
 RUN apt-get update && \
     apt-get install -y \
-    nodejs \
-    npm \
+    curl \
+    gnupg \
+    ca-certificates \
+    build-essential \
+    libc6-dev \
     python3 \
     python3-pip \
     python3-venv \
-    build-essential \
-    libc6-dev \
     network-manager \
     openvpn \
     network-manager-openvpn \
@@ -21,10 +22,13 @@ RUN apt-get update && \
     libnss3-tools \
     gir1.2-appindicator3-0.1 \
     wget \
-    ca-certificates \
     dbus \
     dbus-x11 \
     sudo
+
+# Instalar Node.js via NodeSource (mais confiável)
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs
 
 # Instalar GitKraken
 RUN wget -O /tmp/gitkraken.deb "https://release.gitkraken.com/linux/gitkraken-amd64.deb" && \
