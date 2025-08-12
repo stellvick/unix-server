@@ -9,13 +9,10 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Sao_Paulo
-      - PASSWORD=victor@2025
       - TITLE=UnixDesktop
       - DISABLE_HTTPS_REDIRECT=true
       - PROXY_HEADERS=true
       - BASE_URL=https://unix.stellvick.fun
-      - DOCKER_MODS=linuxserver/mods:universal-package-install|linuxserver/mods:webtop-network-manager
-      - INSTALL_PACKAGES=nodejs|npm|python3|python3-pip|python3-venv|build-essential|libc6-dev
     volumes:
       - './webtop_data:/config'
       - '/var/run/docker.sock:/var/run/docker.sock'

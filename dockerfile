@@ -1,8 +1,15 @@
 FROM lscr.io/linuxserver/webtop:ubuntu-xfce
 
-# Instalar pacotes VPN
+# Instalar todos os pacotes necessários
 RUN apt-get update && \
     apt-get install -y \
+    nodejs \
+    npm \
+    python3 \
+    python3-pip \
+    python3-venv \
+    build-essential \
+    libc6-dev \
     network-manager \
     openvpn \
     network-manager-openvpn \
@@ -14,7 +21,10 @@ RUN apt-get update && \
     libnss3-tools \
     gir1.2-appindicator3-0.1 \
     wget \
-    ca-certificates
+    ca-certificates \
+    dbus \
+    dbus-x11 \
+    sudo
 
 # Instalar GitKraken
 RUN wget -O /tmp/gitkraken.deb "https://release.gitkraken.com/linux/gitkraken-amd64.deb" && \
@@ -26,16 +36,19 @@ RUN mkdir -p /var/run/dbus && \
     chown messagebus:messagebus /var/run/dbus && \
     dbus-uuidgen --ensure
 
-# Configurar autostart
+# Configurar autostart do nm-applet
 RUN mkdir -p /config/.config/autostart && \
     echo '[Desktop Entry]\nType=Application\nName=NetworkManager Applet\nExec=nm-applet --indicator\nComment=Manage network connections' > /config/.config/autostart/nm-applet.desktop
 
-# Copiar e configurar script de inicialização
-COPY custom-init.sh /custom-init.sh
-RUN chmod +x /custom-init.sh
+# Adicionar usuário aos grupos necessários
+RUN usermod -aG netdev abc && \
+    usermod -aG sudo abc
 
-# Fixar permissões
-RUN usermod -aG netdev abc
+# Configurar npm global sem sudo
+RUN mkdir -p /home/abc/.npm-global && \
+    npm config set prefix '/home/abc/.npm-global' && \
+    echo 'export PATH="/home/abc/.npm-global/bin:$PATH"' >> /home/abc/.bashrc
 
-# Definir entrypoint personalizado
-ENTRYPOINT ["/custom-init.sh"]
+# Copiar script de inicialização para a pasta de init.d
+COPY custom-init.sh /etc/cont-init.d/99-custom-init.sh
+RUN chmod +x /etc/cont-init.d/99-custom-init.sh
