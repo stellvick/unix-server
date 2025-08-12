@@ -24,9 +24,20 @@ RUN apt-get update && \
     wget \
     dbus \
     dbus-x11 \
-    sudo
+    sudo \
+    gvfs-bin \
+    libgtk-3-0 \
+    libx11-xcb1 \
+    libxss1 \
+    libasound2 \
+    libgbm1 \
+    libreoffice \
+    remmina \
+    remmina-plugin-rdp \
+    remmina-plugin-vnc \
+    proot
 
-# Instalar Node.js via NodeSource (mais confiável)
+# Instalar Node.js via NodeSource
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs
 
@@ -34,6 +45,16 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
 RUN wget -O /tmp/gitkraken.deb "https://release.gitkraken.com/linux/gitkraken-amd64.deb" && \
     dpkg -i /tmp/gitkraken.deb || apt-get install -f -y && \
     rm /tmp/gitkraken.deb
+
+# Instalar VS Code (usando .deb oficial)
+RUN wget -O /tmp/vscode.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" && \
+    dpkg -i /tmp/vscode.deb || apt-get install -f -y && \
+    rm /tmp/vscode.deb
+
+# Instalar Postman (usando .deb oficial)
+RUN wget -O /tmp/postman.deb "https://dl.pstmn.io/download/latest/linux64" && \
+    dpkg -i /tmp/postman.deb || apt-get install -f -y && \
+    rm /tmp/postman.deb
 
 # Configurar Network Manager
 RUN mkdir -p /var/run/dbus && \
@@ -56,3 +77,79 @@ RUN mkdir -p /home/abc/.npm-global && \
 # Copiar script de inicialização para a pasta de init.d
 COPY custom-init.sh /etc/cont-init.d/99-custom-init.sh
 RUN chmod +x /etc/cont-init.d/99-custom-init.sh
+
+# Criar ícones para o menu
+RUN mkdir -p /usr/share/applications/
+
+# Ícone do GitKraken
+RUN cat > /usr/share/applications/gitkraken.desktop <<EOL
+[Desktop Entry]
+Name=GitKraken
+Exec=/usr/bin/gitkraken
+Icon=/opt/gitkraken/resources/app.asar.unpacked/src/static/linux/gitkraken.png
+Terminal=false
+Type=Application
+Categories=Development;
+EOL
+
+# Ícone do VS Code
+RUN cat > /usr/share/applications/code.desktop <<EOL
+[Desktop Entry]
+Name=VS Code
+Exec=/usr/share/code/code
+Icon=/usr/share/pixmaps/com.visualstudio.code.png
+Terminal=false
+Type=Application
+Categories=Development;
+EOL
+
+# Ícone do Postman
+RUN cat > /usr/share/applications/postman.desktop <<EOL
+[Desktop Entry]
+Name=Postman
+Exec=/usr/bin/postman
+Icon=/usr/share/postman/resources/app/assets/icon.png
+Terminal=false
+Type=Application
+Categories=Development;
+EOL
+
+# Ícone do LibreOffice Writer
+RUN cat > /usr/share/applications/libreoffice-writer.desktop <<EOL
+[Desktop Entry]
+Name=LibreOffice Writer
+Exec=libreoffice --writer
+Icon=libreoffice-writer
+Terminal=false
+Type=Application
+Categories=Office;
+EOL
+
+# Ícone do Remmina
+RUN cat > /usr/share/applications/remmina.desktop <<EOL
+[Desktop Entry]
+Name=Remmina
+Exec=remmina
+Icon=remmina
+Terminal=false
+Type=Application
+Categories=Network;
+EOL
+
+# Ícone para configurar VPN
+RUN cat > /usr/share/applications/nm-connection-editor.desktop <<EOL
+[Desktop Entry]
+Name=Network Connections
+Exec=nm-connection-editor
+Icon=nm-device-wireless
+Terminal=false
+Type=Application
+Categories=System;
+EOL
+
+# Criar atalhos na área de trabalho
+RUN mkdir -p /config/Desktop && \
+    cp /usr/share/applications/gitkraken.desktop /config/Desktop/ && \
+    cp /usr/share/applications/code.desktop /config/Desktop/ && \
+    cp /usr/share/applications/postman.desktop /config/Desktop/ && \
+    cp /usr/share/applications/nm-connection-editor.desktop /config/Desktop/
