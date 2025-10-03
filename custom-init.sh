@@ -24,6 +24,8 @@ export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
 # Iniciar NM Applet como usuário abc
 sudo -u abc dbus-launch /usr/bin/nm-applet --indicator &
 
+sudo npm i -g eas-cli
+
 # Configurar permissões para ícones na área de trabalho
 chown abc:abc /config/Desktop/*.desktop
 chmod +x /config/Desktop/*.desktop
