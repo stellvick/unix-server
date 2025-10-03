@@ -30,5 +30,4 @@ sudo npm i -g eas-cli
 chown abc:abc /config/Desktop/*.desktop
 chmod +x /config/Desktop/*.desktop
 
-# Iniciar o processo principal do Webtop
 exec /init "$@"
