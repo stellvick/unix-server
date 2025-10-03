@@ -59,6 +59,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-21-openjdk-amd64
 ENV ANDROID_HOME /opt/android-sdk
 
 RUN yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
+RUN sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 
 RUN wget -O /tmp/gitkraken.deb "https://release.gitkraken.com/linux/gitkraken-amd64.deb" && \
     dpkg -i /tmp/gitkraken.deb || apt-get install -f -y && \
