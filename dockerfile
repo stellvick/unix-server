@@ -60,6 +60,10 @@ ENV ANDROID_HOME /opt/android-sdk
 
 RUN yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
 
+RUN chown -R abc:abc /opt/android-sdk && \
+    mkdir -p /home/abc/.android && \
+    chown abc:abc /home/abc/.android
+
 RUN wget -O /tmp/gitkraken.deb "https://release.gitkraken.com/linux/gitkraken-amd64.deb" && \
     dpkg -i /tmp/gitkraken.deb || apt-get install -f -y && \
     rm /tmp/gitkraken.deb
