@@ -28,6 +28,7 @@ RUN apt-get install -y \
     libnss3-tools \
     gir1.2-appindicator3-0.1 \
     wget \
+    unzip \
     dbus \
     dbus-x11 \
     sudo \
@@ -40,12 +41,24 @@ RUN apt-get install -y \
     remmina-plugin-rdp \
     remmina-plugin-vnc \
     proot \
-    gvfs
+    gvfs \
+    openjdk-21-jdk
 
 RUN apt-get install -y libasound2t64 || apt-get install -y libasound2
 
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs
+
+RUN wget -O /tmp/commandlinetools-linux.zip https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip && \
+    mkdir -p /opt/android-sdk/cmdline-tools && \
+    unzip /tmp/commandlinetools-linux.zip -d /opt/android-sdk/cmdline-tools && \
+    mv /opt/android-sdk/cmdline-tools/cmdline-tools /opt/android-sdk/cmdline-tools/latest && \
+    rm /tmp/commandlinetools-linux.zip
+
+ENV JAVA_HOME /usr/lib/jvm/java-21-openjdk-amd64
+ENV ANDROID_HOME /opt/android-sdk
+
+RUN yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
 
 RUN wget -O /tmp/gitkraken.deb "https://release.gitkraken.com/linux/gitkraken-amd64.deb" && \
     dpkg -i /tmp/gitkraken.deb || apt-get install -f -y && \

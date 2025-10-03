@@ -13,6 +13,14 @@ chown abc:abc $XDG_RUNTIME_DIR
 # Adicionar caminhos importantes ao PATH
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
 
+# Configurar JAVA_HOME
+export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+export PATH="$JAVA_HOME/bin:$PATH"
+
+# Configurar ANDROID_HOME
+export ANDROID_HOME=/opt/android-sdk
+export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH"
+
 # Iniciar NM Applet como usuário abc
 sudo -u abc dbus-launch /usr/bin/nm-applet --indicator &
 
