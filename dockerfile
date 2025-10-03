@@ -60,6 +60,9 @@ ENV ANDROID_HOME /opt/android-sdk
 
 RUN yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
 
+RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platform-tools"
+RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "build-tools;35.0.1"
+
 RUN chown -R abc:abc /opt/android-sdk && \
     mkdir -p /home/abc/.android && \
     chown abc:abc /home/abc/.android

@@ -26,8 +26,6 @@ sudo -u abc dbus-launch /usr/bin/nm-applet --indicator &
 
 sudo npm i -g eas-cli
 
-sudo -u abc $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platforms;android-35-ext15" "platform-tools" "build-tools;35.0.1"
-
 # Configurar permissões para ícones na área de trabalho
 chown abc:abc /config/Desktop/*.desktop
 chmod +x /config/Desktop/*.desktop
