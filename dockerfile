@@ -61,12 +61,12 @@ ENV ANDROID_NDK_HOME /opt/android-sdk/ndk/27.1.12297006
 
 RUN yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
 
-RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platform-tools"
-RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "build-tools;35.0.0"
-RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "build-tools;36.0.0"
-RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-36"
-RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "cmake;3.22.1"
-RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "ndk;27.1.12297006"
+RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager $ANDROID_PLATFORM_TOOLS
+RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager $ANDROID_BT_35
+RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager $ANDROID_BT_36
+RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager $ANDROID_PLATFORM
+RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager $CMAKE_VERSION
+RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager $NDK_VERSION
 
 RUN chown -R abc:abc /opt/android-sdk && \
     mkdir -p /home/abc/.android && \
