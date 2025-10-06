@@ -63,6 +63,7 @@ RUN yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
 
 RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platform-tools"
 RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "build-tools;35.0.0"
+RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "build-tools;36.0.0"
 RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-36"
 RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "ndk;27.1.12297006"
 
