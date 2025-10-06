@@ -62,6 +62,7 @@ RUN yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
 
 RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platform-tools"
 RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "build-tools;35.0.1"
+RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "ndk;27.1.12297006"
 
 RUN chown -R abc:abc /opt/android-sdk && \
     mkdir -p /home/abc/.android && \
