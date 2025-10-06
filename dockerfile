@@ -58,21 +58,15 @@ RUN wget -O /tmp/commandlinetools-linux.zip https://dl.google.com/android/reposi
 ENV JAVA_HOME /usr/lib/jvm/java-21-openjdk-amd64
 ENV ANDROID_HOME /opt/android-sdk
 ENV ANDROID_NDK_HOME /opt/android-sdk/ndk/27.1.12297006
-ENV ANDROID_PLATFORM_TOOLS platform-tools
-ENV ANDROID_BT_35 build-tools;35.0.0
-ENV ANDROID_BT_36 build-tools;36.0.0
-ENV ANDROID_PLATFORM platforms;android-36
-ENV CMAKE_VERSION cmake;3.22.1
-ENV NDK_VERSION ndk;27.1.12297006
 
 RUN yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
 
-RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "$ANDROID_PLATFORM_TOOLS"
-RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "$ANDROID_BT_35"
-RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "$ANDROID_BT_36"
-RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "$ANDROID_PLATFORM"
-RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "$CMAKE_VERSION"
-RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "$NDK_VERSION"
+RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platform-tools"
+RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "build-tools;35.0.0"
+RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "build-tools;36.0.0"
+RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-36"
+RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "cmake;3.22.1"
+RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "ndk;27.1.12297006"
 
 RUN chown -R abc:abc /opt/android-sdk && \
     mkdir -p /home/abc/.android && \
