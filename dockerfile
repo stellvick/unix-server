@@ -57,7 +57,7 @@ RUN wget -O /tmp/commandlinetools-linux.zip https://dl.google.com/android/reposi
 
 ENV JAVA_HOME /usr/lib/jvm/java-21-openjdk-amd64
 ENV ANDROID_HOME /opt/android-sdk
-ENV ANDROID_NDK_HOME=/opt/android-sdk/ndk/27.1.12297006
+ENV ANDROID_NDK_HOME /opt/android-sdk/ndk/27.1.12297006
 
 RUN yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
 
