@@ -13,6 +13,12 @@ services:
       - DISABLE_HTTPS_REDIRECT=true
       - PROXY_HEADERS=true
       - BASE_URL=https://unix.stellvick.fun
+      - ANDROID_PLATFORM_TOOLS=platform-tools
+      - ANDROID_BT_35=build-tools;35.0.0
+      - ANDROID_BT_36=build-tools;36.0.0
+      - ANDROID_PLATFORM=platforms;android-36
+      - CMAKE_VERSION=cmake;3.22.1
+      - NDK_VERSION=ndk;27.1.12297006
     volumes:
       - './webtop_data:/config'
       - '/var/run/docker.sock:/var/run/docker.sock'
