@@ -13,6 +13,7 @@ export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
 export PATH="$JAVA_HOME/bin:$PATH"
 export ANDROID_HOME=/opt/android-sdk
 export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH"
+export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/27.1.12297006
 
 sudo -u abc dbus-launch /usr/bin/nm-applet --indicator &
 
