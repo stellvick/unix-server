@@ -1,10 +1,10 @@
-# Unix Server - Desktop Linux em Container
+# Unix Server - Desktop Linux via Coolify
 
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
 ![XFCE](https://img.shields.io/badge/XFCE-%232284F2.svg?style=for-the-badge&logo=xfce&logoColor=white)
 
-Um ambiente de desenvolvimento completo baseado em Ubuntu com interface gráfica XFCE, executando em container Docker. Ideal para desenvolvimento, testes e acesso remoto a um desktop Linux completo através do navegador.
+Um ambiente de desenvolvimento completo baseado em Ubuntu com interface gráfica XFCE, implantado via Coolify. Ideal para desenvolvimento, testes e acesso remoto a um desktop Linux completo através do navegador.
 
 ## 📋 Índice
 
@@ -38,6 +38,12 @@ Um ambiente de desenvolvimento completo baseado em Ubuntu com interface gráfica
 - 10GB de espaço em disco livre
 
 ## 🔧 Instalação
+
+Este projeto é implantado via Coolify. Para acessar o desktop:
+
+1. Acesse: `https://unix.stellvick.fun`
+
+Para desenvolvimento local com Docker:
 
 1. **Clone o repositório:**
 ```bash
@@ -103,6 +109,7 @@ docker-compose up -d --build
 
 ### Desenvolvimento
 - **Visual Studio Code** - Editor de código com extensões
+- **PyCharm** - IDE Python com interface gráfica
 - **GitKraken** - Cliente Git com interface gráfica
 - **Postman** - Teste de APIs REST
 - **Node.js 20** - Runtime JavaScript
