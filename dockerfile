@@ -45,6 +45,8 @@ RUN apt-get install -y \
 
 RUN apt-get install -y libasound2t64 || apt-get install -y libasound2
 
+RUN apt-get install -y dash
+
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs
 
@@ -59,10 +61,6 @@ RUN wget -O /tmp/vscode.deb "https://code.visualstudio.com/sha/download?build=st
 RUN wget -O /tmp/postman.deb "https://dl.pstmn.io/download/latest/linux64" && \
     dpkg -i /tmp/postman.deb || apt-get install -f -y && \
     rm /tmp/postman.deb
-
-RUN wget -O /tmp/pycharm.tar.gz "https://download.jetbrains.com/python/pycharm-2025.2.4.tar.gz?_gl=1*rx0evi*_gcl_au*NzY0ODQ4OTUzLjE3NjQwMTM2Nzg.*FPAU*NzY0ODQ4OTUzLjE3NjQwMTM2Nzg.*_ga*ODA1NDU3NjYuMTc2NDAxMzY3OA..*_ga_9J976DJZ68*czE3NjQwMTM2NzYkbzEkZzEkdDE3NjQwMTM3NTUkajYwJGwwJGgw" && \
-    tar -xzf /tmp/pycharm.tar.gz -C /opt/ && \
-    rm /tmp/pycharm.tar.gz
 
 RUN mkdir -p /var/run/dbus && \
     chown messagebus:messagebus /var/run/dbus && \
@@ -113,16 +111,6 @@ Type=Application
 Categories=Development;
 EOL
 
-RUN cat > /usr/share/applications/pycharm.desktop <<EOL
-[Desktop Entry]
-Name=PyCharm
-Exec=/opt/pycharm-community-2023.3.4/bin/pycharm.sh
-Icon=/opt/pycharm-community-2023.3.4/bin/pycharm.png
-Terminal=false
-Type=Application
-Categories=Development;
-EOL
-
 RUN cat > /usr/share/applications/libreoffice-writer.desktop <<EOL
 [Desktop Entry]
 Name=LibreOffice Writer
@@ -157,7 +145,6 @@ RUN mkdir -p /config/Desktop && \
     cp /usr/share/applications/gitkraken.desktop /config/Desktop/ && \
     cp /usr/share/applications/code.desktop /config/Desktop/ && \
     cp /usr/share/applications/postman.desktop /config/Desktop/ && \
-    cp /usr/share/applications/pycharm.desktop /config/Desktop/ && \
     cp /usr/share/applications/nm-connection-editor.desktop /config/Desktop/
 
 RUN which nm-connection-editor || echo "nm-connection-editor not found!" && \
